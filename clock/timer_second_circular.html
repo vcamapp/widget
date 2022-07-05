@@ -1,0 +1,128 @@
+<!--
+ Seconds timer / 秒数タイマー
+  ------
+    60
+  ------
+
+  Restart by click / クリックで最初からカウントダウン
+
+  ```
+  // set countdown number
+  startCountdown(60);
+  ```
+
+  SPDX-License-Identifier: MIT
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <vcam-meta width=80 height=80 fps=2></vcam-meta>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: #4D4D4D;
+      font-size: 24px;
+    }
+
+    body {
+      height: 100%;
+      width: 100%;
+    }
+
+    #countdown {
+      position: relative;
+      height: 80px;
+      width: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotateY(-180deg) rotateZ(-90deg);
+    }
+
+    svg circle {
+      stroke-dasharray: 226px;
+      stroke-dashoffset: 0px;
+      stroke-linecap: round;
+      stroke-width: 4px;
+      stroke: #4D4D4D;
+      fill: none;
+    }
+
+    @keyframes countdown {
+      from {
+        stroke-dashoffset: 0px;
+      }
+
+      to {
+        stroke-dashoffset: 226px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="countdown">
+    <div id="countdown-number"></div>
+    <svg>
+      <circle id="circle" r="36" cx="40" cy="40"></circle>
+    </svg>
+  </div>
+  <script>
+    var countdownElement = document.getElementById('countdown');
+    var countdownNumberElement = document.getElementById('countdown-number');
+    var circle = document.getElementById("circle");
+    var timerId = null;
+
+    function startCountdown(countdown) {
+      const maxCountdown = countdown;
+      countdownNumberElement.textContent = countdown;
+      circle.style.animation = `countdown ${countdown}s linear forwards`;
+
+      countdownElement.onclick = function () {
+        countdown = maxCountdown;
+
+        countdownNumberElement.textContent = countdown;
+        // https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Animations/Tips#Run_an_animation_again
+        circle.style.animation = "";
+        window.requestAnimationFrame(function (time) {
+          window.requestAnimationFrame(function (time) {
+            circle.style.animation = `countdown ${countdown}s linear forwards`;
+          });
+        });
+      }
+
+      if (timerId != null) {
+        clearInterval(timerId);
+      }
+
+      timerId = setInterval(function () {
+        countdown = --countdown <= 0 ? 0 : countdown;
+        countdownNumberElement.textContent = countdown;
+      }, 1000);
+    }
+
+    startCountdown(60);
+  </script>
+</body>
+
+</html>
