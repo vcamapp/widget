@@ -1,5 +1,6 @@
 VCam Widget
 ---
+<img width="1101" alt="VCam Widgets" src="https://user-images.githubusercontent.com/8188636/178796247-0ef9b21b-310c-4de9-b752-0c3ec25139e9.png">
 
 This repository distributes widgets that can be installed as VCam web objects.
 
