@@ -17,7 +17,7 @@
 <html>
 
 <head>
-  <vcam-meta width=80 height=80 fps=2></vcam-meta>
+  <vcam-meta width=192 height=192 fps=2></vcam-meta>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 
@@ -33,18 +33,20 @@
     body {
       font-family: 'Roboto', sans-serif;
       color: #4D4D4D;
-      font-size: 24px;
+      font-size: 48px;
     }
 
-    body {
-      height: 100%;
-      width: 100%;
+    #container {
+      width: 160px;
+      padding: 16px;
+      border-radius: 16px;
+      background: #fff;
     }
 
     #countdown {
       position: relative;
-      height: 80px;
-      width: 80px;
+      height: 160px;
+      width: 160px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -60,10 +62,10 @@
     }
 
     svg circle {
-      stroke-dasharray: 226px;
+      stroke-dasharray: 452px;
       stroke-dashoffset: 0px;
       stroke-linecap: round;
-      stroke-width: 4px;
+      stroke-width: 8px;
       stroke: #4D4D4D;
       fill: none;
     }
@@ -74,18 +76,20 @@
       }
 
       to {
-        stroke-dashoffset: 226px;
+        stroke-dashoffset: 452px;
       }
     }
   </style>
 </head>
 
 <body>
-  <div id="countdown">
-    <div id="countdown-number"></div>
-    <svg>
-      <circle id="circle" r="36" cx="40" cy="40"></circle>
-    </svg>
+  <div id="container">
+    <div id="countdown">
+      <div id="countdown-number"></div>
+      <svg>
+        <circle id="circle" r="72" cx="80" cy="80"></circle>
+      </svg>
+    </div>
   </div>
   <script>
     var countdownElement = document.getElementById('countdown');
